@@ -8,6 +8,15 @@ const _ = require("lodash");
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
 const crypto = require("crypto");
+const Handlebars = require("handlebars");
+const path = require("path");
+const fs = require("fs");
+
+const profilePage = Handlebars.compile(
+	fs
+		.readFileSync(path.resolve(__dirname, "./templates/profile.html"))
+		.toString()
+);
 
 // Database
 const db = {
@@ -29,7 +38,7 @@ const uuidv4 = () => {
 		).toString(16)
 	);
 };
-const profile = ({ name, email, phone, id, data }) => {
+const profile = ({ name, email, phone, id, data, render }) => {
 	let prof = db.profiles.get("data");
 	let user = name
 		? prof.find({ name }).value()
@@ -42,12 +51,19 @@ const profile = ({ name, email, phone, id, data }) => {
 		: false;
 
 	if (!user && name && (email || phone) && data) {
-		prof.push({
+		user = {
 			name,
 			email,
 			phone,
 			id: uuidv4(),
 			data
-		}).write();
+		};
+		prof.push(user).write();
 	}
+
+	if (render) return profilePage(user);
+
+	return user;
 };
+
+console.log(profile({ name: "IceHacks", render: true }));

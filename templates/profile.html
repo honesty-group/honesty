@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>{{name}} - Honesty</title>
+		<link rel="stylesheet" type="text/css" href="main.css" />
+	</head>
+
+	<body>
+		<nav>
+			<content>
+				<a href="#">
+					Home
+				</a>
+				<a href="#">
+					Profile
+				</a>
+				<spacer></spacer>
+				<a href="#">
+					Search
+				</a>
+			</content>
+		</nav>
+		<header style="background-image:url({{data.backgroundPic}})">
+			<content>
+				{{name}}
+				<spacer></spacer>
+				{{#if data.lastseen}}
+				<span>Last Seen: {{data.lastseen}}</span>
+				{{else}}
+				<span>Never Used</span>
+				{{/if}}
+			</content>
+		</header>
+		<content>
+			<page>
+				<box>
+					h
+				</box>
+			</page>
+		</content>
+	</body>
+</html>

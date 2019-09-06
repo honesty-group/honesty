@@ -1,0 +1,62 @@
+/* CSS Document */
+body {
+	margin: 0;
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, "sans-serif";
+	font-size: 17px;
+}
+nav {
+	background: #944324;
+	display: flex;
+	flex-direction: row;
+	height: 40px;
+	align-items: center;
+	position: sticky;
+	width: 100%;
+	box-shadow: 0 0 2px rgba(17,17,17,0.76);
+}
+nav a {
+	color: whitesmoke;
+	text-decoration: none;
+	padding: 0 5px;
+}
+content {
+	max-width: 800px;
+	flex: 1;
+	display: flex;
+	padding: 0 5px;
+	margin: 0 auto;
+}
+spacer {
+	flex: 1;
+}
+header {
+	height: 200px;
+	background: #CD7654;
+	color: whitesmoke;
+	font-size: 36px;
+	padding: 34.5px 5px 0;
+	display: flex;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	text-shadow: 0 0 2px rgba(17,17,17,0.76);
+}
+header span {
+	display: block;
+	font-size: 17px;
+	margin-top: 13px;
+}
+page {
+	margin: -85px 0px 10px;
+	flex: 1;
+}
+box {
+	background: #E9E9E9;
+	padding: 10px;
+	display: flex;
+	border-radius: 5px;
+	margin: 0 5px;
+}
+* {
+	box-sizing: border-box;
+}

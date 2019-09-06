@@ -9,6 +9,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"handlebars": "^4.2.0",
 		"lodash": "^4.17.15",
 		"lowdb": "^1.0.0"
 	}
