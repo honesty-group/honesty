@@ -7,6 +7,7 @@
 const _ = require("lodash");
 const low = require("lowdb");
 const FileSync = require("lowdb/adapters/FileSync");
+const crypto = require("crypto");
 
 // Database
 const db = {
@@ -20,8 +21,16 @@ db.profiles
 	.write();
 
 // Functions
-const profile = ({ name, email, phone, id }) => {
-	let prof = db.profiles.get("profiles");
+const uuidv4 = () => {
+	return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
+		(
+			c ^
+			(crypto.randomFillSync(new Uint8Array(1))[0] & (15 >> (c / 4)))
+		).toString(16)
+	);
+};
+const profile = ({ name, email, phone, id, data }) => {
+	let prof = db.profiles.get("data");
 	let user = name
 		? prof.find({ name }).value()
 		: email
@@ -32,7 +41,13 @@ const profile = ({ name, email, phone, id }) => {
 		? prof.find({ id }).value()
 		: false;
 
-	console.log(user);
+	if (!user && name && (email || phone) && data) {
+		prof.push({
+			name,
+			email,
+			phone,
+			id: uuidv4(),
+			data
+		}).write();
+	}
 };
-
-profile({ name: "IceHacks" });
