@@ -6,6 +6,7 @@ body {
 	display:flex;
 	flex-direction: column;
 	background-color: #FCFCFF;
+	color: #342E37;
 }
 header {
 	height: 350px;
@@ -42,6 +43,7 @@ header main {
 	flex-direction: row;
 	display: flex;
 	padding: 0 10px;
+	text-shadow: 0 0 5px rgb(25,25,25);
 }
 header main span {
 	font-size: 36px;
@@ -96,6 +98,9 @@ flex {
 .big {
 	flex: 2;
 }
+.center {
+	align-items: center;
+}
 
 inner {
 	max-width: 900px;
@@ -115,4 +120,8 @@ button {
 
 * {
 	box-sizing: border-box;
+}
+
+::selection {
+	background: #A2D729;
 }
