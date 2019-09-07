@@ -36,6 +36,27 @@ spacer {
 	flex: 1;
 }
 
+header main {
+	flex: 1;
+	align-items: center;
+	flex-direction: row;
+	display: flex;
+	padding: 0 10px;
+}
+header main span {
+	font-size: 36px;
+	color: white;
+	height: fit-content;
+}
+header main span.sm {
+	font-size: 17px;
+}
+header main inner {
+	margin-top: -125px;
+	display:flex;
+	align-items: center;
+}
+
 content {
 	margin: -125px 10px 10px;
 	display: flex;
@@ -80,6 +101,16 @@ inner {
 	max-width: 900px;
 	margin: 0 auto;
 	flex: 1;
+}
+
+button {
+	border: none;
+	padding: 10px 20px;
+	border-radius: 32px;
+	background: #A2D729;
+	font-size: 17px;
+	color: #342E37;
+	cursor: pointer;
 }
 
 * {
