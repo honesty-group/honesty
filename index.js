@@ -54,7 +54,7 @@ const readJSON = (path, safe) => {
 
 	return res;
 };
-const profile = ({ name, email, phone, id, data, render }) => {
+const profile = ({ name, email, phone, id, data, render }, create) => {
 	let prof = db.profiles.get("data");
 
 	name = name ? name.toLowerCase() : false;
@@ -71,7 +71,7 @@ const profile = ({ name, email, phone, id, data, render }) => {
 		? prof.find({ id }).value()
 		: false;
 
-	if (!user && name && (email || phone) && data) {
+	if (create && !user && name && (email || phone) && data) {
 		user = {
 			name,
 			email,
