@@ -14,7 +14,7 @@ const fs = require("fs");
 
 const profilePage = Handlebars.compile(
 	fs
-		.readFileSync(path.resolve(__dirname, "./templates/profile.html"))
+		.readFileSync(path.resolve(__dirname, "./templates/profile-main.html"))
 		.toString()
 );
 
@@ -38,8 +38,29 @@ const uuidv4 = () => {
 		).toString(16)
 	);
 };
+const createJSON = (path, json) => {
+	fs.writeFileSync(path, JSON.stringify(json));
+};
+const readJSON = (path, safe) => {
+	let res;
+	try {
+		res = JSON.parse(fs.readFileSync(path));
+	} catch (e) {
+		res = {};
+	}
+
+	if (safe)
+		res = _.pick(res, ["name", "id", "posts", "followers", "following"]);
+
+	return res;
+};
 const profile = ({ name, email, phone, id, data, render }) => {
 	let prof = db.profiles.get("data");
+
+	name = name ? name.toLowerCase() : false;
+	email = email ? email.toLowerCase() : false;
+	id = id ? id.toLowerCase() : false;
+
 	let user = name
 		? prof.find({ name }).value()
 		: email
@@ -55,15 +76,28 @@ const profile = ({ name, email, phone, id, data, render }) => {
 			name,
 			email,
 			phone,
-			id: uuidv4(),
-			data
+			id: uuidv4()
 		};
 		prof.push(user).write();
+
+		_.defaults(data, {
+			name,
+			email,
+			phone,
+			id: user.id,
+			password: data.password || "",
+			posts: [],
+			followers: [],
+			following: []
+		});
+
+		createJSON(
+			path.resolve(__dirname, "./storage/profiles/", name + ".json"),
+			data
+		);
 	}
 
 	if (render) return profilePage(user);
 
 	return user;
 };
-
-console.log(profile({ name: "IceHacks", render: true }));
